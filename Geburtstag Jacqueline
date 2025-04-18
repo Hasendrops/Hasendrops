@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Jacquelines interaktive Geburtstagskarte</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: goldenrod;
+            margin-top: 40px;
+        }
+        .note-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        .note {
+            background-color: #f0fff0;
+            border: 2px solid goldenrod;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .note:hover {
+            transform: scale(1.1);
+            background-color: #ccffcc;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 3px solid goldenrod;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            border-radius: 10px;
+        }
+        .close {
+            color: black;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal h2 {
+            color: #228B22;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Happy Birthday, Jacqueline!</h1>
+<div class="note-container" id="noteContainer"></div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+    </div>
+</div>
+
+<script>
+    const notes = [
+        { title: "Saxophon | Musikalisch & poetisch", text: "Wenn du spielst, klingt selbst der Wind wie Jazz. Dein Saxophon ist nicht nur ein Instrument, sondern eine Sprache, die nur Herzen verstehen." },
+        { title: "Grüne Jugend | Aktivistisch & kraftvoll", text: "Du kämpfst für eine bessere Welt – mit Herz, Haltung und der festen Überzeugung, dass jede Stimme zählt. Deine Leidenschaft für Gerechtigkeit macht dich so besonders." },
+        { title: "Freund | Liebevoll & subtil", text: "An deiner Seite jemand, der dich schätzt – so wie wir. Eure Verbindung ist spürbar, echt und schön mitanzusehen." },
+        { title: "Veganerin | Augenzwinkernd & charmant", text: "Kein Käse, kein Steak – dafür doppelt so viel Geschmack fürs Leben! Du zeigst, dass Mitgefühl auch auf dem Teller seinen Platz hat." },
+        { title: "Katzen | Niedlich & verspielt", text: "Du bist eindeutig eine Katzenflüsterin – elegant, freiheitsliebend und mit einem Herz für samtige Pfoten." },
+        { title: "Wird Ärztin | Stolz & anerkennend", text: "Bald wirst du Leben retten, zuhören, heilen – mit deinem klugen Kopf und einem noch klügeren Herzen. Wir sind stolz auf dich!" },
+        { title: "Mainz | Lokal & warmherzig", text: "Mainz ist vielleicht nicht am Meer, aber es hat jetzt ein bisschen Sonne mehr – weil du dort wohnst." },
+        { title: "Portugal & Strand | Fernweh & träumerisch", text: "Wenn du vom Strand sprichst, spürt man die Wärme des Südens. Portugal ist nicht nur ein Ort, sondern ein Gefühl – deins." },
+        { title: "Nudeln & Roséwein | Genussvoll & locker", text: "Mit Pasta in der einen Hand, Rosé in der anderen – du verstehst das Leben. Und das ganz ohne Parmesan!" },
+        { title: "Filme | Kinomagie & cozy Vibes", text: "Ob Drama, Doku oder Rom-Com – du liebst Geschichten. Und am besten sind sie, wenn man sie teilt." },
+        { title: "Menschen & Zusammensein | Sozial & herzlich", text: "Du bringst Menschen zusammen, ohne es zu versuchen. Deine Wärme macht jeden Raum heller – und jede Runde lebendiger." }
+    ];
+
+    const container = document.getElementById("noteContainer");
+
+    notes.forEach((note, index) => {
+        const div = document.createElement("div");
+        div.className = "note";
+        div.innerText = "♪";
+        div.onclick = () => openModal(note.title, note.text);
+        container.appendChild(div);
+    });
+
+    function openModal(title, text) {
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalText").innerText = text;
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === document.getElementById("modal")) {
+            closeModal();
+        }
+    };
+</script>
+
+</body>
+</html>
